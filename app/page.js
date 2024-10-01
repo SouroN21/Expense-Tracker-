@@ -64,63 +64,72 @@ const deleteItem = async (id) => {
 };
 
 return (
-  <main className='flex flex-col items-center justify-between min-h-screen p-4 sm:p-24'>
+  <main 
+      style={{
+        backgroundImage: 'url("https://images.pexels.com/photos/8442431/pexels-photo-8442431.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1")',
+        backgroundSize: 'cover', 
+        backgroundPosition: 'center',
+      }}
+      className='flex flex-col items-center justify-between min-h-screen p-4 sm:p-24'>
     <div className='z-10 items-center justify-between w-full max-w-5xl font-mono text-sm '>
-      <h1 className='p-4 text-4xl text-center'>Expense Tracker</h1>
-      <div className='p-4 rounded-lg bg-slate-800'>
-        <form className='grid items-center grid-cols-6 text-black'>
-          <input
-            value={newItem.name}
-            onChange={(e) => setNewItem({ ...newItem, name: e.target.value })}
-            className='col-span-3 p-3 border'
-            type='text'
-            placeholder='Enter Item'
-          />
-          <input
-            value={newItem.price}
-            onChange={(e) =>
-              setNewItem({ ...newItem, price: e.target.value })
-            }
-            className='col-span-2 p-3 mx-3 border'
-            type='number'
-            placeholder='Enter $'
-          />
-          <button
-            onClick={addItem}
-            className='p-3 text-xl text-white bg-slate-950 hover:bg-slate-900'
-            type='submit'
-          >
-            +
-          </button>
-        </form>
-        <ul>
-          {items.map((item, id) => (
-            <li
-              key={id}
-              className='flex justify-between w-full my-4 text-white bg-slate-950'
-            >
-              <div className='flex justify-between w-full p-4 '>
-                <span className='capitalize'>{item.name}</span>
-                <span>${item.price}</span>
-              </div>
-              <button
-                onClick={() => deleteItem(item.id)}
-                className='w-16 p-4 ml-8 text-white border-l-2 border-slate-900 hover:bg-slate-900'
-              >
-                X
-              </button>
-            </li>
-          ))}
-        </ul>
-        {items.length < 1 ? (
-          ''
-        ) : (
-          <div className='flex justify-between p-3 text-white'>
-            <span>Total</span>
-            <span>${total}</span>
-          </div>
-        )}
-      </div>
+    <h1 className="p-4 text-5xl text-center text-white transition duration-300 transform rounded-lg shadow-lg bg-gradient-to-r from-blue-500 to-purple-600 ">
+      Expense Tracker
+    </h1>
+    <br/>
+    <div className='p-6 rounded-lg shadow-lg bg-slate-800'>
+  <form className='grid items-center grid-cols-6 gap-4 text-black'>
+    <input
+      value={newItem.name}
+      onChange={(e) => setNewItem({ ...newItem, name: e.target.value })}
+      className='col-span-3 p-4 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-blue-500'
+      type='text'
+      placeholder='Enter Item'
+    />
+    <input
+      value={newItem.price}
+      onChange={(e) =>
+        setNewItem({ ...newItem, price: e.target.value })
+      }
+      className='col-span-2 p-4 mx-3 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-blue-500'
+      type='number'
+      placeholder='Enter $'
+    />
+    <button
+      onClick={addItem}
+      className='p-4 text-xl text-white transition duration-200 bg-blue-600 rounded hover:bg-blue-700'
+      type='submit'
+    >
+      +
+    </button>
+  </form>
+  
+  <ul className='mt-6'>
+    {items.map((item) => (
+      <li
+        key={item.id}
+        className='flex justify-between w-full my-4 text-white transition duration-200 rounded-lg bg-slate-950 hover:bg-slate-700'
+      >
+        <div className='flex justify-between w-full p-4 text-xl'>
+          <span className='capitalize'>{item.name}</span>
+          <span>${item.price}</span>
+        </div>
+        <button
+          onClick={() => deleteItem(item.id)}
+          className='w-16 p-4 ml-8 text-xl text-white transition duration-200 border-l-2 rounded-lg border-slate-900 hover:bg-red-600'
+        >
+          X
+        </button>
+      </li>
+    ))}
+  </ul>
+
+  {items.length > 0 && (
+    <div className='flex justify-between p-3 mt-4 text-xl text-white'>
+      <span>Total</span>
+      <span>${total}</span>
+    </div>
+  )}
+</div>
     </div>
   </main>
 );
